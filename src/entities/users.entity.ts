@@ -14,6 +14,9 @@ class user  {
     @Column({ length: 120 })
     password: string
 
+    @Column({ type: 'boolean', default: false })
+    admin: boolean | undefined
+
     @CreateDateColumn({ type: 'timestamp' })
     createdAt: string | Date
 
@@ -21,7 +24,7 @@ class user  {
     updatedAt: string | Date
 
     @DeleteDateColumn({ type: 'timestamp' })
-    updateAt: string | Date
+    deletedAt: string | Date
 
 }
 
