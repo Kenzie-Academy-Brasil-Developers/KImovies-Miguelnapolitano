@@ -1,34 +1,38 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import addres from "./addresses.entity";
-import category from "./categories.entity";
+import Address from "./addresses.entity";
+import Category from "./categories.entity";
+import Schedule from "./schedules_users_properties.entity";
 
 
 @Entity('real_state')
-class realState {
+class RealEstate {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ type: 'boolean' ,default: false })
-    sold: boolean
+    @Column({ type: 'boolean', default: false })
+    sold?: boolean
 
-    @Column({ type:'decimal', precision: 12, scale: 2 })
-    value: number
+    @Column({ type:'decimal', precision: 12, scale: 2, default: 0 })
+    value: number | string
 
     @Column({ type: 'integer' })
     size: number
 
-    @CreateDateColumn({ type: 'timestamp' })
-    createdAt: string | Date
+    @CreateDateColumn({ type: 'date' })
+    createdAt: string
 
-    @UpdateDateColumn({ type: 'timestamp' })
-    updatedAt: string | Date
+    @UpdateDateColumn({ type: 'date' })
+    updatedAt: string
 
-    @OneToOne(() => addres, addresses => addresses.id)
+    @OneToOne(() => Address)
     @JoinColumn()
-    address: addres
+    address: Address
 
-    @ManyToOne(() => category, categories => categories.id)
-    category: category[]
+    @ManyToOne(() => Category)
+    category: Category
+
+    @OneToMany(() => Schedule, schedules_users_properties => schedules_users_properties.realEstate)
+    schedules: Schedule[]
 }
 
-export default realState
+export default RealEstate

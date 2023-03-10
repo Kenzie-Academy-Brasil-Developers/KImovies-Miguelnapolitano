@@ -1,31 +1,44 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne } from 'typeorm';
+import { getRounds, hashSync } from 'bcryptjs';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
+import Schedule from './schedules_users_properties.entity';
 
 @Entity('users')
-class user  {
+class User  {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ length: 45 })
+    @Column({ type: 'varchar', length: 45 })
     name: string
 
-    @Column({ length: 45, unique: true })
+    @Column({ type: 'varchar', length: 45, unique: true })
     email: string
 
-    @Column({ length: 120 })
+    @Column({ type: 'varchar', length: 120 })
     password: string
 
     @Column({ type: 'boolean', default: false })
-    admin: boolean | undefined
+    admin: boolean
 
-    @CreateDateColumn({ type: 'timestamp' })
-    createdAt: string | Date
+    @CreateDateColumn({ type: 'date' })
+    createdAt: string
 
-    @UpdateDateColumn({ type: 'timestamp' })
-    updatedAt: string | Date
+    @UpdateDateColumn({ type: 'date' })
+    updatedAt: string
 
-    @DeleteDateColumn({ type: 'timestamp' })
-    deletedAt: string | Date
+    @DeleteDateColumn({ type: 'date' })
+    deletedAt: string
 
+    @OneToMany(() => Schedule, schedules => schedules.user)
+    schedules: Schedule[]
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    hashPassword(){
+        const isEncrypted = getRounds(this.password)
+        if(!isEncrypted){
+            this.password = hashSync(this.password, 10)
+        }
+    }
 }
 
-export default user
+export default User

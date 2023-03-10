@@ -3,14 +3,14 @@ import {
   iUserWithoutPassword,
 } from '../../interfaces/users.interfaces'
 import { userRepository } from '../repositories'
-import { user } from '../../entities'
+import { User } from '../../entities'
 import { returnUserWithoutPasswordSchema } from '../../schemas/users.schemas'
 
 const createUserService = async (
   userData: iUserRequest
 ): Promise<iUserWithoutPassword> => {
 
-  const user: user = userRepository.create(userData)
+  const user: User = userRepository.create(userData)
 
   await userRepository.save(user)
 
@@ -20,4 +20,4 @@ const createUserService = async (
   return newUser
 }
 
-export { createUserService }
+export default createUserService

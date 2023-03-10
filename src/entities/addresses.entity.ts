@@ -3,25 +3,25 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('addresses')
-class addres {
+class Address {
 
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ length: 45 })
+    @Column({ type: 'varchar', length: 45 })
     street: string
 
-    @Column({ length: 8 })
+    @Column({ type: 'varchar', length: 8 })
     zipCode: string
 
-    @Column({ type: 'varchar', length: 7, nullable: true, default: null })
-    number: string | null
+    @Column({ type: 'varchar', length: 7, nullable: true })
+    number: string | null | undefined
 
-    @Column({ length: 20 })
+    @Column({ type: 'varchar', length: 20 })
     city: string
 
-    @Column({ length: 2 })
+    @Column({ type: 'varchar', length: 2 })
     state: string
 }
 
-export default addres
+export default Address

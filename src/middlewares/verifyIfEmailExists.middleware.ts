@@ -5,14 +5,17 @@ import { userRepository } from '../services/repositories'
 
 const verifyIfEmailExists = async (req:Request, res:Response, next: NextFunction): Promise<void> => {
 
-    const findEmail = await userRepository.findOne({
-        where: {
-            email: req.body.email 
-        }
-    })
+    if(req.body.email){
 
-    if (findEmail) {
-        throw new AppError('E-mail alredy exists', 409)
+        const findEmail = await userRepository.findOne({
+            where: {
+                email: req.body.email 
+            }
+        })
+    
+        if (findEmail) {
+            throw new AppError('Email already exists', 409)
+        }
     }
 
     next()

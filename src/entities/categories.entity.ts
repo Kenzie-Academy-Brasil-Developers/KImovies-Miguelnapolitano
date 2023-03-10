@@ -1,14 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import RealEstate from "./real_state.entity";
 
 
 @Entity('categories') 
-class category {
+class Category {
 
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ length: 45, unique: true })
+    @Column({ type: 'varchar', length: 45, unique: true })
     name: string
+
+    @OneToMany(() => RealEstate, realEstate => realEstate.category)
+    realEstate: RealEstate[]
 }
 
-export default category
+export default Category

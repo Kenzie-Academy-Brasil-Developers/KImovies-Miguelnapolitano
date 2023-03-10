@@ -1,25 +1,25 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import realState from "./real_state.entity";
-import user from "./users.entity";
+import RealState from "./real_state.entity";
+import User from "./users.entity";
 
 
 @Entity('schedules_users_properties')
-class schedulesUsersProperties {
+class Schedule {
 
     @PrimaryGeneratedColumn()
     id: number
 
     @Column({ type: 'date' })
-    date: Date
+    date: String
 
-    @Column()
+    @Column({ type: 'time' })
     hour: string
 
-    @ManyToOne(() => user, users => users.id)
-    user: user
+    @ManyToOne(() => User)
+    user: User
 
-    @ManyToOne(() => realState, real_state => real_state.id)
-    realEstate: realState
+    @ManyToOne(() => RealState, real_state => real_state.schedules)
+    realEstate: RealState
 }
 
-export default schedulesUsersProperties
+export default Schedule

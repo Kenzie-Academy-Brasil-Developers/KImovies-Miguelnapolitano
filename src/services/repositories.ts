@@ -1,7 +1,13 @@
 import { Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
-import { user } from '../entities'
+import { Address, Category, RealEstate, User } from '../entities'
 
-const userRepository: Repository<user> = AppDataSource.getRepository(user)
+const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-export { userRepository }
+const categoryRepository: Repository<Category> = AppDataSource.getRepository(Category)
+
+const addressRepository: Repository<Address> = AppDataSource.getRepository(Address)
+
+const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
+
+export { userRepository, categoryRepository, addressRepository, realEstateRepository }

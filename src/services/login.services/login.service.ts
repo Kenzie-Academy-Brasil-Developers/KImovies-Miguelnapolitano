@@ -1,5 +1,5 @@
 import { compare } from 'bcryptjs'
-import { user } from '../../entities'
+import { User } from '../../entities'
 import { AppError } from '../../errors'
 import { iLoginRequest } from '../../interfaces/login.interfaces'
 import { userRepository } from '../repositories'
@@ -9,7 +9,7 @@ const loginService = async (
     loginData: iLoginRequest
   ): Promise<string> => {
 
-    const user: user | null = await userRepository.findOneBy({
+    const user: User | null = await userRepository.findOneBy({
         email: loginData.email
     })
 
@@ -23,9 +23,11 @@ const loginService = async (
         throw new AppError('Wrong email or password', 401)
     }
 
+    console.log(user)
+
     const token: string = jwt.sign(
         {
-            isAdmin: user.admin
+            admin: user.admin
         },
             process.env.SECRET_KEY!,
         {
