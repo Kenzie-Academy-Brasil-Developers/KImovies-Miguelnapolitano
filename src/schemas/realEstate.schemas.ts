@@ -1,30 +1,40 @@
-import { z } from 'zod'
-import { returnCategorySchema } from './category.schemas'
+import { number, z } from 'zod'
+import { Category } from '../entities'
+import { createCategorySchema } from './category.schemas'
 
-const AddressRequestSchema = z.object({
+const addressRequestSchema = z.object({
     street: z.string().max(45),
     zipCode: z.string().max(8),
-    number: z.string().max(7).optional().nullable().default(null),
+    number: z.string().max(7).nullable().default(null).optional(),
     city: z.string().max(20),
     state: z.string().max(2)
 })
 
-const realEstateRequestSchema = z.object({
-    sold: z.boolean().optional().default(false),
-    value: z.number().optional().default(0),
-    size: z.number().int(),
-    category: z.number(),
-    address: AddressRequestSchema
+const addresReturnSchema = addressRequestSchema.extend({
+    id: number()
 })
 
-const realEstateReturnSchema = realEstateRequestSchema.extend({
+const realEstateSchema = z.object({
+    sold: z.boolean().optional().default(false),
+    value: z.number().or(z.string()).optional().default(0),
+    size: z.number().int().positive()
+})
+
+const realEstateRequestSchema = realEstateSchema.extend({   
+    address: addressRequestSchema,
+    categoryToCreate: createCategorySchema.optional()
+})
+
+const realEstateReturnSchema = realEstateSchema.extend({
     id: z.number(),
     createdAt: z.string(),
-    deletedAt: z.string().nullable(),
     updatedAt: z.string(),
-    category: returnCategorySchema
+    category: createCategorySchema,
+    address: addresReturnSchema
 })
+
+const realEstateWithoutCategorySchema = realEstateReturnSchema.omit({category: true})
 
 const realEstateMultipleReturnSchema = realEstateReturnSchema.array()
 
-export { AddressRequestSchema, realEstateRequestSchema, realEstateReturnSchema, realEstateMultipleReturnSchema }
+export { addressRequestSchema, addresReturnSchema, realEstateRequestSchema, realEstateReturnSchema, realEstateMultipleReturnSchema, realEstateWithoutCategorySchema }
