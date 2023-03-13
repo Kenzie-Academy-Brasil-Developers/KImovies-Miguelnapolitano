@@ -1,6 +1,5 @@
 import { number, z } from 'zod'
-import { Category } from '../entities'
-import { createCategorySchema } from './category.schemas'
+import { returnCategorySchema } from './category.schemas'
 
 const addressRequestSchema = z.object({
     street: z.string().max(45),
@@ -11,7 +10,7 @@ const addressRequestSchema = z.object({
 })
 
 const addresReturnSchema = addressRequestSchema.extend({
-    id: number()
+    id: z.number()
 })
 
 const realEstateSchema = z.object({
@@ -22,19 +21,19 @@ const realEstateSchema = z.object({
 
 const realEstateRequestSchema = realEstateSchema.extend({   
     address: addressRequestSchema,
-    categoryToCreate: createCategorySchema.optional()
+    categoryId: z.number()
 })
 
 const realEstateReturnSchema = realEstateSchema.extend({
     id: z.number(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-    category: createCategorySchema,
+    createdAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()),
+    category: returnCategorySchema,
     address: addresReturnSchema
 })
 
 const realEstateWithoutCategorySchema = realEstateReturnSchema.omit({category: true})
-
+                
 const realEstateMultipleReturnSchema = realEstateReturnSchema.array()
 
-export { addressRequestSchema, addresReturnSchema, realEstateRequestSchema, realEstateReturnSchema, realEstateMultipleReturnSchema, realEstateWithoutCategorySchema }
+export { addressRequestSchema, addresReturnSchema, realEstateRequestSchema, realEstateReturnSchema, realEstateMultipleReturnSchema, realEstateWithoutCategorySchema}

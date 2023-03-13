@@ -3,7 +3,7 @@ import { User } from '../entities'
 import { AppError } from '../errors'
 import { userRepository } from '../services/repositories'
 
-const verifyIfIdExists = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const verifyIfUserIdExists = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const id: number = Number(req.params.id)
 
     const findId: User | null = await userRepository.findOneBy({
@@ -17,4 +17,4 @@ const verifyIfIdExists = async (req: Request, res: Response, next: NextFunction)
     next()
 }
 
-export default verifyIfIdExists
+export default verifyIfUserIdExists

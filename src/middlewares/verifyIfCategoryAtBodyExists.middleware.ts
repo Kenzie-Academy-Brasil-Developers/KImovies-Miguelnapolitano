@@ -5,13 +5,13 @@ import { iRealEstateRequest } from '../interfaces/realEstate.interfaces'
 import { categoryRepository } from '../services/repositories'
 
 
-const verifyIfCategoryExistsMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const verifyIfCategoryAtBodyExistsMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
     const requestData: iRealEstateRequest = req.body
 
-    if(requestData.categoryToCreate!.name){
+    if(requestData.categoryId){
         const findCategory: Category | null = await categoryRepository.findOneBy({
-            name: requestData.categoryToCreate!.name
+            id: requestData.categoryId
         })
     
         if(!findCategory){
@@ -22,4 +22,4 @@ const verifyIfCategoryExistsMiddleware = async (req: Request, res: Response, nex
     next()
 }
 
-export default verifyIfCategoryExistsMiddleware
+export default verifyIfCategoryAtBodyExistsMiddleware

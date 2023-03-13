@@ -1,10 +1,7 @@
 import { z } from 'zod'
-import { realEstateWithoutCategorySchema } from './realEstate.schemas'
-import { returnUserWithoutPasswordSchema } from './users.schemas'
-
 
 const createScheduleDataSchema = z.object({
-    date: z.date().or(z.string()),
+    date: z.string(),
     hour: z.string(),
     realEstateId: z.number()
 })

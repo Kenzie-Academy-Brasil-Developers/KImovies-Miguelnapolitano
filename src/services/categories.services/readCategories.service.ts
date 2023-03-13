@@ -1,4 +1,3 @@
-import { Category } from '../../entities'
 import { iCategories } from '../../interfaces/categories.interfaces'
 import { returnCategoriesSchema } from '../../schemas/category.schemas'
 import { categoryRepository } from '../repositories'

@@ -6,7 +6,7 @@ import { realEstateRepository, scheduleRepository, userRepository } from '../rep
 
 const createScheduleService = async (
 scheduleData: iScheduleData, userId: number
-): Promise<iSchedule> => {
+) => {
 
     const findUser: User | null = await userRepository.findOneBy({
         id: userId
@@ -21,7 +21,7 @@ scheduleData: iScheduleData, userId: number
     })
 
     if(!findRealEstate){
-        throw new AppError('Real estate not found', 409)
+        throw new AppError('RealEstate not found', 404)
     }
 
     const creatingSchedule = {
@@ -34,16 +34,6 @@ scheduleData: iScheduleData, userId: number
     const newSchedule: Schedule = scheduleRepository.create(creatingSchedule)
 
     await scheduleRepository.save(newSchedule)
-
-    console.log(newSchedule) 
-
-    return createScheduleReturnSchema.parse({
-        id: Number(newSchedule.id),
-        date: newSchedule.date,
-        hour: newSchedule.hour,
-        userId: Number(newSchedule.user.id),
-        realEstateId: Number(newSchedule.realEstate.id)
-    })
 
 }
 

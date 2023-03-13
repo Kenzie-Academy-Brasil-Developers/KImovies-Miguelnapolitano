@@ -14,7 +14,7 @@ const createRealEstateService = async (realEstateData: iRealEstateRequest): Prom
     })
 
     if(findAddress){
-        throw new AppError('Address alredy exists', 409)
+        throw new AppError('Address already exists', 409)
     }
 
     const address: Address = addressRepository.create(realEstateData.address)
@@ -24,7 +24,7 @@ const createRealEstateService = async (realEstateData: iRealEstateRequest): Prom
     const newAddress = addresReturnSchema.parse(address)
 
     const findCategory: Category | null = await categoryRepository.findOneBy({
-        name: realEstateData.categoryToCreate!.name
+        id: realEstateData.categoryId
     })
 
     const realEstate: RealEstate = realEstateRepository.create({

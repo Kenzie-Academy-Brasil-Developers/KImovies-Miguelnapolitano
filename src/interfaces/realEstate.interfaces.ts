@@ -5,7 +5,7 @@ import { addressRequestSchema, realEstateMultipleReturnSchema, realEstateRequest
 type iRealEstateRequest = z.infer<typeof realEstateRequestSchema>
 type iRealEstate = z.infer<typeof realEstateReturnSchema>
 type iAddressRequest = DeepPartial<z.infer<typeof addressRequestSchema>> 
-type iRealEstates = z.infer<typeof realEstateMultipleReturnSchema>
+type iRealEstates = DeepPartial<z.infer<typeof realEstateMultipleReturnSchema>>
 
 
 export { iRealEstateRequest, iRealEstate, iAddressRequest, iRealEstates }
