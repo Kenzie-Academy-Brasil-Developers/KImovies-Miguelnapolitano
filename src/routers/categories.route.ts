@@ -4,7 +4,6 @@ import readCategoriesController from '../controllers/categories.controllers/read
 import readRealEstateInCategorieController from '../controllers/categories.controllers/readRealEstateInCategory.controller'
 import verifyIfCategoryAtParamsExistsMiddleware from '../middlewares/verifyIfCategoryAtParamsExists.middleware'
 import verifyIfIsAdm from '../middlewares/verifyIfIsAdm.middleware'
-import verifyIfRealEstateIdExists from '../middlewares/verifyIfRealEstateIdExists.middleware'
 import verifyToken from '../middlewares/verifyToken.middleware'
 
 const categoriesRoutes = Router()
@@ -12,7 +11,6 @@ const categoriesRoutes = Router()
 categoriesRoutes.post("/", verifyToken, verifyIfIsAdm, createCategoryController)
 
 categoriesRoutes.get("/", readCategoriesController)
-
 
 categoriesRoutes.get("/:id/realEstate", verifyIfCategoryAtParamsExistsMiddleware, readRealEstateInCategorieController)
 

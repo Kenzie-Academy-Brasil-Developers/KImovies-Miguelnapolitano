@@ -4,5 +4,4 @@ import realEstateRoutes from './realEstate.route'
 import schedulesRoutes from './schedules.route'
 import usersRoutes from './users.route'
 
-
 export { categoriesRoutes, usersRoutes, loginRoutes, realEstateRoutes, schedulesRoutes }

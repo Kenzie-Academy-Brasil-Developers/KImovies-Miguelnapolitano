@@ -8,7 +8,7 @@ const readAllUsersService = async ():Promise<iUsersReturn> => {
 
     const findUsers: Array<User> = await userRepository.find()
 
-    const users = retunrMultipleUsersSchema.parse(findUsers)
+    const users: iUsersReturn = retunrMultipleUsersSchema.parse(findUsers)
 
     return users
 }

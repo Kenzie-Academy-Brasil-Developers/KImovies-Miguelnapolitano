@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import { User } from '../../entities'
+import { iUsersReturn } from '../../interfaces/users.interfaces'
 import readAllUsersService from '../../services/users.servivces/readAllUsers.service'
 
 
@@ -7,7 +9,7 @@ const readAllUsersController = async (
     res: Response
   ): Promise<Response> => {
   
-    const users = await readAllUsersService()
+    const users: iUsersReturn = await readAllUsersService()
   
     return res.json(users)
 }

@@ -17,13 +17,11 @@ const loginService = async (
         throw new AppError('Invalid credentials', 401)
     }
 
-    const passwordMatch = await compare(loginData.password, user.password)
+    const passwordMatch: boolean = await compare(loginData.password, user.password)
 
     if(!passwordMatch){
         throw new AppError('Invalid credentials', 401)
     }
-
-    console.log(user)
 
     const token: string = jwt.sign(
         {

@@ -1,9 +1,9 @@
-import { realEstateRepository, scheduleRepository } from "../repositories"
+import { RealEstate } from "../../entities"
+import { realEstateRepository} from "../repositories"
 
+const readScheduleService = async (id: number): Promise<RealEstate> => {
 
-const readScheduleService = async (id: number): Promise<object> => {
-
-    const findSchedule = await realEstateRepository.createQueryBuilder("real_state")
+    const findSchedule: RealEstate | null = await realEstateRepository.createQueryBuilder("real_state")
     .where("real_state.id = :id", {id: id})
     .leftJoinAndSelect("real_state.address", "address")
     .leftJoinAndSelect("real_state.category", "category")

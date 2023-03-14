@@ -1,6 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('addresses')
 class Address {

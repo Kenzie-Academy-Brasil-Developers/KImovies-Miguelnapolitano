@@ -1,8 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Address from "./addresses.entity";
-import Category from "./categories.entity";
-import Schedule from "./schedules_users_properties.entity";
-
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import Address from './addresses.entity'
+import Category from './categories.entity'
+import Schedule from './schedules_users_properties.entity'
 
 @Entity('real_state')
 class RealEstate {

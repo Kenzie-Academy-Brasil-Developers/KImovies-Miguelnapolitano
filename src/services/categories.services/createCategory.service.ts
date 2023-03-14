@@ -1,13 +1,11 @@
 import { Category } from '../../entities'
 import { AppError } from '../../errors'
-import { iCategory, iCategoryRequest } from '../../interfaces/categories.interfaces'
-import { returnCategorySchema } from '../../schemas/category.schemas'
+import { iCategoryRequest } from '../../interfaces/categories.interfaces'
 import { categoryRepository } from '../repositories'
-
 
 const createCategoryService = async (catData: iCategoryRequest) => {
 
-    const findCat = await categoryRepository.findOneBy({
+    const findCat: Category | null = await categoryRepository.findOneBy({
         name: catData.name
     })
 
@@ -19,9 +17,7 @@ const createCategoryService = async (catData: iCategoryRequest) => {
 
     await categoryRepository.save(category)
 
-    const newCategory: iCategory = returnCategorySchema.parse(category)
-
-    return newCategory
+    return category
 }
 
 export default createCategoryService

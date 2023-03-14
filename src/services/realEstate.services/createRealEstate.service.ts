@@ -21,8 +21,6 @@ const createRealEstateService = async (realEstateData: iRealEstateRequest): Prom
 
     await addressRepository.save(address)
 
-    const newAddress = addresReturnSchema.parse(address)
-
     const findCategory: Category | null = await categoryRepository.findOneBy({
         id: realEstateData.categoryId
     })
@@ -32,7 +30,7 @@ const createRealEstateService = async (realEstateData: iRealEstateRequest): Prom
         value: realEstateData.value,
         size: realEstateData.size,
         category: findCategory!,
-        address: newAddress
+        address: address
     })
 
     await realEstateRepository.save(realEstate)

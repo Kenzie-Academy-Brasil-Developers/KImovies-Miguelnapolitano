@@ -1,8 +1,9 @@
+import { iCategoriesWithRealEstate } from '../../interfaces/categories.interfaces'
 import { categoryRepository } from '../repositories'
 
-const readRealEstateInCategorieService = async (id: number): Promise<object> => {
+const readRealEstateInCategorieService = async (id: number): Promise<iCategoriesWithRealEstate> => {
 
-    const category = await categoryRepository.createQueryBuilder("categories")
+    const category: iCategoriesWithRealEstate | null = await categoryRepository.createQueryBuilder("categories")
     .where("categories.id = :id", {id: id})
     .leftJoinAndSelect("categories.realEstate", "realEstate")
     .getOne()

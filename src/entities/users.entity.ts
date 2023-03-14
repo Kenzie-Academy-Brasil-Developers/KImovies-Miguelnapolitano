@@ -1,6 +1,6 @@
-import { getRounds, hashSync } from 'bcryptjs';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
-import Schedule from './schedules_users_properties.entity';
+import { getRounds, hashSync } from 'bcryptjs'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm'
+import Schedule from './schedules_users_properties.entity'
 
 @Entity('users')
 class User  {

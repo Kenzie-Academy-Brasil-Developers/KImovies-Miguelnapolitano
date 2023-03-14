@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { RealEstate, Schedule } from '../entities'
-import User from '../entities/users.entity'
+import { Schedule } from '../entities'
 import { AppError } from '../errors'
-import { userRepository, realEstateRepository, scheduleRepository } from '../services/repositories'
-
+import { scheduleRepository } from '../services/repositories'
 
 const verifySchedulesMiddleware = async (req:Request, res:Response, next: NextFunction): Promise<void> => {
 
@@ -27,7 +25,6 @@ const verifySchedulesMiddleware = async (req:Request, res:Response, next: NextFu
         throw new AppError('Schedule to this real estate at this date and time already exists', 409)
     }
    
-    
     next()
 }
 

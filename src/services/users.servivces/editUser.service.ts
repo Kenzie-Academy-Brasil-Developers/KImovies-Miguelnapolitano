@@ -1,3 +1,4 @@
+import { User } from '../../entities'
 import { AppError } from '../../errors'
 import { iEditUser, iUserWithoutPassword } from '../../interfaces/users.interfaces'
 import { returnUserWithoutPasswordSchema } from '../../schemas/users.schemas'
@@ -9,11 +10,11 @@ const editUserService = async (reqUser: any, id: number, editData: iEditUser): P
         throw new AppError("Insufficient permission", 403)
     }
 
-    const currentUser = await userRepository.findOneBy({
+    const currentUser: User | null = await userRepository.findOneBy({
         id: id
     })
     
-    const newUser = userRepository.create({
+    const newUser: User = userRepository.create({
         ...currentUser,
         ...editData
     })

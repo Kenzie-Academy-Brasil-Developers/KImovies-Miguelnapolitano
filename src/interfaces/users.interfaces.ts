@@ -1,4 +1,3 @@
-import { QueryResult } from 'pg'
 import { DeepPartial } from 'typeorm'
 import { z } from 'zod'
 import { User } from '../entities'
@@ -7,9 +6,6 @@ import { createUserSchema, retunrMultipleUsersSchema, returnUserSchema, returnUs
 type iUserRequest = z.infer<typeof createUserSchema>
 type iUser = z.infer<typeof returnUserSchema>
 type iUserWithoutPassword = z.infer<typeof returnUserWithoutPasswordSchema>
-
-type iUserResult = QueryResult<iUser>
-type iUserResultWithoutPassword = QueryResult<iUserWithoutPassword>
 
 type iUsersReturn = z.infer<typeof retunrMultipleUsersSchema>
 
@@ -20,5 +16,5 @@ interface iReqUser{
     isAdmin: boolean | string
 }
 
-export { iUserRequest, iUser, iUserWithoutPassword, iUserResult, iUserResultWithoutPassword, iUsersReturn, iEditUser, iReqUser }
+export { iUserRequest, iUser, iUserWithoutPassword, iUsersReturn, iEditUser, iReqUser }
 

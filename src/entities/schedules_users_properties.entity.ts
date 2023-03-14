@@ -1,7 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import RealState from "./real_state.entity";
-import User from "./users.entity";
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import RealState from './real_state.entity'
+import User from './users.entity'
 
 @Entity('schedules_users_properties')
 class Schedule {

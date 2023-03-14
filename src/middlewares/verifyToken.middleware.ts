@@ -9,7 +9,7 @@ const verifyToken = async (
   next: NextFunction
 ): Promise<void> => {
   
-  let token = req.headers.authorization
+  let token: string | undefined = req.headers.authorization
 
   if (!token) {
     throw new AppError("Missing bearer token", 401)
@@ -28,6 +28,7 @@ const verifyToken = async (
     }
 
     return next()
+    
   })
 }
 

@@ -1,4 +1,4 @@
-import { number, z } from 'zod'
+import { z } from 'zod'
 import { returnCategorySchema } from './category.schemas'
 
 const addressRequestSchema = z.object({

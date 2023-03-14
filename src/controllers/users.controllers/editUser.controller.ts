@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { iUserWithoutPassword } from '../../interfaces/users.interfaces'
 import editUserService from '../../services/users.servivces/editUser.service'
 
 const editUserController = async (
@@ -6,7 +7,7 @@ const editUserController = async (
     res: Response
   ): Promise<Response> => {
   
-    const user = await editUserService(req.user, parseInt(req.params.id), req.body)
+    const user: iUserWithoutPassword = await editUserService(req.user, parseInt(req.params.id), req.body)
   
     return res.json(user)
 }

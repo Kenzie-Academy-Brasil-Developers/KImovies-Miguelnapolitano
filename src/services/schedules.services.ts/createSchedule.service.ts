@@ -1,7 +1,6 @@
 import { RealEstate, Schedule, User } from '../../entities'
 import { AppError } from '../../errors'
-import { iSchedule, iScheduleData, iScheduleRequest } from '../../interfaces/schedules.interfaces'
-import { createScheduleReturnSchema } from '../../schemas/schedules.schemas'
+import { iScheduleData } from '../../interfaces/schedules.interfaces'
 import { realEstateRepository, scheduleRepository, userRepository } from '../repositories'
 
 const createScheduleService = async (
